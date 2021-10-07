@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "./auth";
+
+message Verification {
+  string name = 1;
+  string email = 2;
+  string otp = 3;
+  oneof tokenVerification {
+    string token = 4;
+  }
+}
+
+message ResetPassword {
+  string name = 1;
+  string email = 2;
+  string token = 3;
+}
+
+message VerificationReply {
+  string message = 1;
+}
+
+message ResetPasswordReply {
+  string message = 1;
+}
+
+service UserAuthService {
+  // gRPC for send email verification
+  rpc SendEmailVerification(Verification) returns (VerificationReply) {}
+
+  // gRPC for send email reset password
+  rpc SendEmailResetPassword(ResetPassword) returns (ResetPasswordReply) {}
+}

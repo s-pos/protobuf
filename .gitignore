@@ -1,0 +1,7 @@
+.idea
+.env
+.json
+.xml
+.out
+vendor/
+node_modules/
